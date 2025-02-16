@@ -33,7 +33,7 @@ O código principal está estruturado da seguinte forma:
 
 ## 🔧 Instalação e Compilação
 ### 1️⃣ Configurar o ambiente de desenvolvimento
-Certifique-se de que você tem o **SDK do Raspberry Pi Pico** configurado.
+Certifique-se de que você tem o **SDK do Raspberry Pi Pico W** configurado.
 
 ### 3️⃣ Carregar no Raspberry Pi Pico W
 - Conecte a placa ao PC via **USB** segurando o botão **BOOTSEL**.
@@ -42,10 +42,8 @@ Certifique-se de que você tem o **SDK do Raspberry Pi Pico** configurado.
 ## 🎮 Como Usar
 - Pressione **BTA (GPIO 5)** para tocar **notas Dó e Ré**.
 - Pressione **BTB (GPIO 6)** para tocar **notas Mi e Fá**.
-- O LED pisca durante a execução das notas.
 
 ## 📌 Melhorias Futuras
 - Adicionar mais notas musicais.
-- Criar melodias automáticas.
-- Implementar controle de intensidade dinâmico.
+- Adicionar suporte a múltiplos buzzers.
 
