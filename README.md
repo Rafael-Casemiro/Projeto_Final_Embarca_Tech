@@ -1,7 +1,71 @@
 # 🎵 Projeto: Controle de Buzzer com Raspberry Pi Pico W
 
-## 📌 Descrição
-Este projeto utiliza um **buzzer piezoelétrico** e **botões** conectados ao **Raspberry Pi Pico W** para gerar sons musicais diferentes conforme a interação do usuário. O sistema utiliza **PWM (Modulação por Largura de Pulso)** para controlar a frequência e a intensidade das notas sonoras.
+
+<br/>
+<div align="center">
+  <h3 align="center">Controle de Buzzer com Raspberry Pi Pico W</h3>
+
+  <p align="center">
+    Um projeto com Raspberry Pi Pico para controle de uma matriz de LEDs, buzzer e botões interativos.
+    <br/>
+    ·
+    <a href="https://www.youtube.com/">Vídeo Demonstrativo</a>
+  </p>
+</div>
+
+
+## Índice
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Construído com](#construído-com)
+- [Recursos](#recursos)
+- [Começando](#começando)
+- [Pré-requisitos](#pré-requisitos)
+- [Tecnologias Utilizadas](#uso)
+- [Uso](#uso)
+- [Instalação](#instalação)
+- [Melhorias](#contribuindo)
+
+
+## 📌 Sobre o Projeto
+
+Este projeto foi desenvolvido para controlar uma matriz de LEDs e emitir notas musicais utilizando um buzzer, LEDs e um display OLED SSD1306. Ele foi feito para ser executado em uma Raspberry Pi Pico (ou uma placa similar baseada no RP2040), utilizando a biblioteca Pico SDK para controle de hardware.
+
+### 🔧 Construído com
+
+* [Raspberry Pi Pico C/C++ SDK](https://www.raspberrypi.com/documentation/microcontrollers/c_sdk.html)
+* [PIO (Programmable I/O)](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html#programmable-io)
+* CMake
+
+---
+
+## 🎯 Recursos
+
+✔️ Raspberry Pi Pico W (RP2040): A placa de desenvolvimento usada  
+✔️ Reprodução de **notas musicais** no **Buzzer** (GPIO21)  
+✔️ **Botões físicos** para interação:  
+   - **Botão A** (GPIO5) → Ativa sequência de notas (Dó, Ré)  
+   - **Botão B** (GPIO6) → Ativa sequência de notas (Mi, Fá)  
+✔️ **Display OLED SSD1306** para exibição
+✔️ **Matriz de LEDs** para exibir efeitos de luz
+
+---
+
+## ⚙️ Pré-requisitos
+
+- **Hardware necessário:**
+  - Raspberry Pi Pico W
+  - Matriz de LEDs 
+  - Buzzer Piezoelétrico 
+  - Display OLED  
+  - Botões físicos para controle
+
+- **Software necessário:**
+  - Raspberry Pi Pico SDK
+  - CMake
+  - Compilador ARM GCC
+  - Ferramentas de build (Ninja ou Make)
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
 - **Linguagem:** C
@@ -10,40 +74,51 @@ Este projeto utiliza um **buzzer piezoelétrico** e **botões** conectados ao **
   - `pico/stdlib.h` (Funções padrão do SDK)
   - `hardware/pwm.h` (Controle do PWM)
   - `hardware/clocks.h` (Configuração do clock do sistema)
-
-## ⚙️ Hardware Necessário
-- Raspberry Pi Pico W
-- Buzzer Piezoelétrico
-- 2 Botões Push-Button
-- LED
-- Resistores de Pull-Up
-
-## 🛠️ Configuração do Circuito
-1. Conecte o **buzzer** ao **GPIO 21**.
-2. Conecte os **botões** aos pinos **GPIO 5 (BTA)** e **GPIO 6 (BTB)**.
-3. Utilize resistores de **pull-up internos** para os botões.
-4. Conecte os **LEDS indicadores** ao **GPIO 11** e **GPIO 12**.
-
-## 📜 Estrutura do Código
-O código principal está estruturado da seguinte forma:
-- **Inicialização do hardware**: Configura os botões como entrada com pull-up e define o PWM no buzzer.
-- **Função `pwm_init_buzzer(pin, frequencia)`**: Inicializa o PWM no pino do buzzer para gerar a nota desejada.
-- **Função `beep(pin, duration_ms)`**: Emite um som pelo buzzer durante um determinado tempo.
-- **Loop principal**: Verifica o estado dos botões e emite diferentes notas e intensidades de som.
-
-## 🔧 Instalação e Compilação
-### 1️⃣ Configurar o ambiente de desenvolvimento
-Certifique-se de que você tem o **SDK do Raspberry Pi Pico W** configurado.
-
-### 3️⃣ Carregar no Raspberry Pi Pico W
-- Conecte a placa ao PC via **USB** segurando o botão **BOOTSEL**.
-- Copie o arquivo **`.uf2`** gerado para a unidade USB do Pico.
+  - `ssd1306.h` (Biblioteca para controlar o display OLED)
+  - `hardware/i2c.h` (Controlador I2C)
+  - `hardware/pwm.h` (Controlador PWM)
+  - `display_init` (Funções de inicialização do display)
+  - `pio_matrix.pio.h` (Código para controlar a matriz de LEDs via PIO)
+  - `frames.h` (Configurações específicas para a matriz de LEds)
+  - `config_leds.h` (Arquivos com configurações específicas para a matriz de LEDs)
 
 ## 🎮 Como Usar
 - Pressione **BTA (GPIO 5)** para tocar **notas Dó e Ré**.
 - Pressione **BTB (GPIO 6)** para tocar **notas Mi e Fá**.
 
+---
+
+## 🔧 Instalação e Compilação
+
+1️⃣ Clone o repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
+2️⃣ Navegue até o diretório do projeto:
+   ```sh
+   cd seu-repositorio
+   ```
+3️⃣ Crie e entre no diretório `build`:
+   ```sh
+   mkdir build && cd build
+   ```
+4️⃣ Gere os arquivos de build com CMake:
+   ```sh
+   cmake ..
+   ```
+5️⃣ Compile o projeto:
+   ```sh
+   make
+   ```
+6️⃣ Envie o arquivo `.uf2` para a Raspberry Pi Pico W.
+
+---
+
 ## 📌 Melhorias Futuras
 - Adicionar mais notas musicais.
 - Adicionar suporte a múltiplos buzzers.
+
+
+
+   
 
