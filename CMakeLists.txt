@@ -44,8 +44,13 @@ pico_set_program_version(Projeto_Final_Embarca_Tech "0.1")
 pico_enable_stdio_uart(Projeto_Final_Embarca_Tech 0)
 pico_enable_stdio_usb(Projeto_Final_Embarca_Tech 1)
 
+pico_generate_pio_header(Projeto_Final_Embarca_Tech ${CMAKE_CURRENT_LIST_DIR}/pio_matrix.pio)
+
+target_sources(Projeto_Final_Embarca_Tech PRIVATE Projeto_Final_Embarca_Tech.c)
+
 # Add the standard library to the build
 target_link_libraries(Projeto_Final_Embarca_Tech
+        hardware_pio
         hardware_i2c
         hardware_pwm
         pico_stdlib)
@@ -61,4 +66,3 @@ target_link_libraries(Projeto_Final_Embarca_Tech
         )
 
 pico_add_extra_outputs(Projeto_Final_Embarca_Tech)
-

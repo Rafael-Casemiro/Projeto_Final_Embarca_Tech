@@ -10,9 +10,13 @@
 #include "hardware/pwm.h"
 #include "hardware/clocks.h"
 #include "display_init.h"
+#include "pio_matrix.pio.h"
+#include "frames.h"
+#include "config_leds.h"
 
 
 #define BUZZER_PIN 21 // Buzzer A, está conectado - através de um transistor - no GPIO21 da Raspberry pi pico
+#define MATRIZ_PIN 7 // A matriz de LED's está conectado ao GPIO07
 #define BTA 05 // O botão A está conectado ao GPIO5
 #define BTB 06 // O botão B está conectado ao GPIO6
 
@@ -27,6 +31,8 @@
 #define RE_FREQUENCIA 294
 #define MI_FREQUENCIA 330
 #define FA_FREQUENCIA 349
+
+
 
 // Preparar área de renderização para o display
 struct render_area frame_area = {
@@ -129,13 +135,28 @@ int main()
     gpio_init(LED_AZUL);
     gpio_set_dir(LED_AZUL, GPIO_OUT);
     
-    
-    
+    PIO pio = pio0;
+    uint32_t valor_led;
+    double r = 0.0, g = 0.0, b = 0.0;
+    bool ok;
+    ok = set_sys_clock_khz(128000, false); // coloca a frequência de clock para 128 MHz, facilitando a divisão pelo clock
+
+
+
+    // Configurações da PIO
+    uint offset = pio_add_program(pio, &pio_matrix_program); // offset recebe o endereço de memória onde o programa foi alocado
+    uint sm = pio_claim_unused_sm(pio, true); // reservando uma máquina de estados
+    pio_matrix_program_init(pio, sm, offset, MATRIZ_PIN); // inicialização do programa na sm
+        
+    clear_display();
 
     while (true) {
         // se o botão A for precionado
         if(gpio_get(BTA) == 0) {
+
             gpio_put(LED_VERDE, 1); // O LED Verde é ligado
+
+            setar_leds_verde(leds[2], valor_led, pio, sm, r, g, b);
 
             // chama função para iniciar o PWM do pino do buzzer
             pwm_init_buzzer(BUZZER_PIN, DO_FREQUENCIA, 2048);
@@ -159,12 +180,16 @@ int main()
             clear_display();
             gpio_put(LED_VERDE, 0);
 
+            setar_leds_verde(leds[0], valor_led, pio, sm, r, g, b);
+
             // Pausa de 0,2 segundos para evitar efeito bouncing
             sleep_ms(200); 
         }
         
         if(gpio_get(BTB) == 0) {
             gpio_put(LED_AZUL, 1); // o LED Azul é ligado
+
+            setar_leds_azul(leds[1], valor_led, pio, sm, r, g, b);
 
             // chama função para iniciar o PWM do pino do buzzer
             pwm_init_buzzer(BUZZER_PIN, MI_FREQUENCIA, 3584);
@@ -185,6 +210,8 @@ int main()
             sleep_ms(300);
             clear_display();
             gpio_put(LED_AZUL, 0);
+
+            setar_leds_azul(leds[0], valor_led, pio, sm, r, g, b);
 
             // Pausa de 0,2 segundos para evitar efeito bouncing
             sleep_ms(200);
