@@ -92,7 +92,7 @@ Este projeto foi desenvolvido para controlar uma matriz de LEDs e emitir notas m
 
 1️⃣ Clone o repositório:
    ```sh
-   git clone https://github.com/Rafael-Casemiro/Projeto_Final_Embarca_Tech
+   git clone https://github.com/Rafael-Casemiro/Projeto_Final_Embarca_Tech.git
    ```
 2️⃣ Navegue até o diretório do projeto:
    ```sh
