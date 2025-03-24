@@ -9,7 +9,7 @@
     Um projeto com Raspberry Pi Pico para controle de uma matriz de LEDs, buzzer e botões interativos.
     <br/>
     ·
-    <a href="https://youtu.be/DM9UFY7cV_A">Vídeo Demonstrativo</a>
+    <a href="https://youtu.be/DM9UFY7cV_A" target = "_blank">Vídeo Demonstrativo</a>
   </p>
 </div>
 
