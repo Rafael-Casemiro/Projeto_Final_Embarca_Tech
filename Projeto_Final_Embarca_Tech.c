@@ -147,8 +147,8 @@ int main()
     uint offset = pio_add_program(pio, &pio_matrix_program); // offset recebe o endereço de memória onde o programa foi alocado
     uint sm = pio_claim_unused_sm(pio, true); // reservando uma máquina de estados
     pio_matrix_program_init(pio, sm, offset, MATRIZ_PIN); // inicialização do programa na sm
-        
-    clear_display();
+       
+    escrever("");
 
     while (true) {
         // se o botão A for precionado

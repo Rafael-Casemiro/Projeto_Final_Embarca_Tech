@@ -9,7 +9,7 @@
     Um projeto com Raspberry Pi Pico para controle de uma matriz de LEDs, buzzer e botões interativos.
     <br/>
     ·
-    <a href="https://www.youtube.com/">Vídeo Demonstrativo</a>
+    <a href="https://youtu.be/DM9UFY7cV_A">Vídeo Demonstrativo</a>
   </p>
 </div>
 
@@ -28,7 +28,7 @@
 
 ## 📌 Sobre o Projeto
 
-Este projeto foi desenvolvido para controlar uma matriz de LEDs e emitir notas musicais utilizando um buzzer, LEDs e um display OLED SSD1306. Ele foi feito para ser executado em uma Raspberry Pi Pico (ou uma placa similar baseada no RP2040), utilizando a biblioteca Pico SDK para controle de hardware.
+Este projeto foi desenvolvido para controlar uma matriz de LEDs e emitir notas musicais utilizando um buzzer, LEDs e um display OLED SSD1306. Ele foi feito para ser executado em uma Raspberry Pi Pico W (ou uma placa similar baseada no RP2040), utilizando a biblioteca Pico SDK para controle de hardware.
 
 ### 🔧 Construído com
 
